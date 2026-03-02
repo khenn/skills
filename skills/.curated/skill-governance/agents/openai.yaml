@@ -1,0 +1,7 @@
+interface:
+  display_name: "Skill Governance"
+  short_description: "Policy-driven creation and validation of Codex skills"
+  default_prompt: "Use $skill-governance to create or refactor skills with minimal context loading and validation gates."
+
+policy:
+  allow_implicit_invocation: true

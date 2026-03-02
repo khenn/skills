@@ -1,0 +1,14 @@
+{
+  "skills": [
+    {
+      "skill": "<skill-name>",
+      "keywords": ["<keyword-1>", "<keyword-2>"],
+      "positive": [
+        "<prompt expected to trigger>"
+      ],
+      "negative": [
+        "<prompt that should not trigger>"
+      ]
+    }
+  ]
+}
