@@ -41,6 +41,7 @@ Optional:
 - Read scope default: workspace-required context.
 - Write scope default: `artwork/` only.
 - Mutation policy default: `output_only`.
+- TOML compatibility: keep `spawn_helpers` and `output_only` behavior in `developer_instructions` unless runtime explicitly supports them as top-level role keys.
 
 ## Delegation Policy
 - Artist default: `spawn_helpers = false`.

@@ -8,13 +8,19 @@
    - role registration in config
    - role TOML config
    - instructions block/file
-5. Validate config parse (for example `codex features list`).
-6. Smoke test role spawn and close.
-7. Return report:
+5. Enforce TOML compatibility:
+   - only known top-level keys
+   - put policy constraints in `developer_instructions` unless runtime key support is explicit
+6. Validate config parse (for example `codex features list`).
+7. Detect runtime role-spawn capability:
+   - if dynamic role spawn is supported, run spawn + close smoke test
+   - if not supported, mark spawn as manual verification required
+8. Return report:
    - files changed
    - assumptions
    - validation results
    - residual risks
+   - manual verification steps (if capability gap exists)
 
 ## Workflow B: Update Existing Role Safely
 1. Lock current role behavior notes.
@@ -33,8 +39,9 @@
 
 ## Validation Gate (Required)
 - Parse check passes.
-- Spawn smoke test passes.
+- Spawn smoke test passes, or is explicitly marked manual-only due to runtime/tool capability.
 - Role-specific sample prompt returns structured handoff format.
+- Report includes required Assumption Warning Block when any manual verification remains.
 
 ## Quality Checklist
 - Role id and config path are valid and stable.
@@ -43,3 +50,6 @@
 - Delegation policy is explicit.
 - Handoff schema is present.
 - No secrets/environment-private values in instructions.
+- No unrecognized top-level TOML keys are emitted.
+- Runtime dynamic-role spawn capability is checked and reported.
+- Assumption Warning Block is present when capability constraints prevent full automation.

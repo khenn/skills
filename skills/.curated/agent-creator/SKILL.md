@@ -42,6 +42,11 @@ Required sequence:
 5. Run spawn smoke test.
 6. Return created files + assumptions + test results.
 
+## TOML Compatibility Rule (Required)
+- Only emit known, loader-safe top-level role TOML keys (for example `model`, `model_reasoning_effort`, `sandbox_mode`, `developer_instructions`).
+- Put behavioral policies such as delegation/mutation constraints inside `developer_instructions` unless the runtime explicitly documents those TOML keys.
+- If uncertain, prefer conservative compatibility and report assumptions.
+
 ## Required Role Contract Sections
 Every created role must explicitly define:
 - Purpose and responsibilities
@@ -51,6 +56,21 @@ Every created role must explicitly define:
 - Delegation policy
 - Quality gates
 - Handoff schema (`Findings`, `Required changes`, `Optional improvements`, `Go/No-Go`)
+
+## Runtime Capability Detection (Required)
+- Detect whether the current execution path can spawn custom/dynamic role IDs.
+- If custom spawn is unavailable in the current tool/runtime, fall back to:
+  1. config parse validation
+  2. explicit interactive verification steps (for example `/agent` list + manual smoke prompt)
+- Do not report custom-role spawn as passed unless it was actually executed in a compatible runtime.
+
+## Assumption Warning Block (Required)
+Always include a final assumptions block when environment capability affects validation outcomes.
+Use this schema:
+- `Capability assumptions`
+- `What was validated automatically`
+- `What still requires interactive/manual verification`
+- `Residual risk`
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` for setup/update pipeline and validation.
