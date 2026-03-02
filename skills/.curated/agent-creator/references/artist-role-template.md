@@ -55,6 +55,19 @@ Optional:
 - Format: structured handoff sections are mandatory.
 - Guardrails: no unsafe output, no hidden assumptions, enforce print-safe considerations when relevant.
 
+## Output Schema Contract (Template Instance)
+- required_sections:
+  - role-specific prompt-pack sections (template-defined)
+  - Findings
+  - Required changes
+  - Optional improvements
+  - Go/No-Go
+- section_order_locked: template-defined
+- verdict_enum:
+  - Go
+  - Go with minor fixes
+  - No-Go
+
 ## Quality Gates
 Objective checks:
 - style consistency

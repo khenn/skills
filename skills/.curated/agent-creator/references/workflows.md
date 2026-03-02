@@ -21,6 +21,8 @@
    - validation results
    - residual risks
    - manual verification steps (if capability gap exists)
+   - validation matrix (`parse_check`, `spawn_check`, `format_check`, `policy_check`)
+   - capability-scoped verification summary
 
 ## Workflow B: Update Existing Role Safely
 1. Lock current role behavior notes.
@@ -42,6 +44,7 @@
 - Spawn smoke test passes, or is explicitly marked manual-only due to runtime/tool capability.
 - Role-specific sample prompt returns structured handoff format.
 - Report includes required Assumption Warning Block when any manual verification remains.
+- Verdict aligns with reported failure triggers and allowed verdict enum.
 
 ## Quality Checklist
 - Role id and config path are valid and stable.
@@ -53,3 +56,4 @@
 - No unrecognized top-level TOML keys are emitted.
 - Runtime dynamic-role spawn capability is checked and reported.
 - Assumption Warning Block is present when capability constraints prevent full automation.
+- Validation matrix is present in final report.

@@ -57,6 +57,26 @@ Every created role must explicitly define:
 - Quality gates
 - Handoff schema (`Findings`, `Required changes`, `Optional improvements`, `Go/No-Go`)
 
+## Output Schema Contract (General)
+- Role templates must define:
+  - `required_sections` (list)
+  - `section_order_locked` (`true|false`)
+  - `verdict_enum` (allowed verdict values for that role/workflow)
+- Generated roles must enforce this contract in instructions.
+- Validation must check presence of required sections and verdict value compliance.
+
+## Failure Trigger Contract (General)
+- Each role template must include 3-5 deterministic `Failure Triggers`.
+- A triggered failure must force a blocking verdict according to the template's `verdict_enum`.
+- Agents must state which failure trigger(s) caused a blocking verdict.
+
+## Role Validation Matrix (General)
+Every role creation/update report must include:
+- `parse_check`
+- `spawn_check` (auto/manual depending on runtime capability)
+- `format_check` (required sections/order present)
+- `policy_check` (forbidden actions not attempted)
+
 ## Runtime Capability Detection (Required)
 - Detect whether the current execution path can spawn custom/dynamic role IDs.
 - If custom spawn is unavailable in the current tool/runtime, fall back to:
